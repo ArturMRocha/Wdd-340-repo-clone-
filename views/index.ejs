@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head') %>
+
+<body>
+  <%- include('./partials/header') %>
+  <%- include('./partials/navigation') %>
+
+  <main class="main-content">
+  <h1>Welcome to CSE Motors!</h1>
+
+  <section class="hero">
+  <picture>
+    <source media="(min-width: 768px)" srcset="/images/vehicles/delorean.jpg">
+
+    <img src="/images/vehicles/delorean-tn.jpg" alt="DMC Delorean prateado">
+  </picture>
+  <div class="hero-box">
+    <h2>DMC Delorean</h2>
+    <p>3 Cup holders<br>Superman doors<br>Fuzzy dice!</p>
+    <a href="#" class="btn-blue">Own Today</a>
+  </div>
+</section>
+
+  <div class="bottom-sections">
+    
+    <section class="upgrades">
+      <h2>Delorean Upgrades</h2>
+      <div class="upgrades-grid">
+        <figure>
+          <div class="bg-blue"><img src="/images/upgrades/flux-cap.png" alt="Flux Capacitor"></div>
+          <figcaption><a href="#">Flux Capacitor</a></figcaption>
+        </figure>
+        <figure>
+          <div class="bg-blue"><img src="/images/upgrades/flame.jpg" alt="Flame Decals"></div>
+          <figcaption><a href="#">Flame Decals</a></figcaption>
+        </figure>
+        <figure>
+          <div class="bg-blue"><img src="/images/upgrades/bumper_sticker.jpg" alt="Bumper Stickers"></div>
+          <figcaption><a href="#">Bumper Stickers</a></figcaption>
+        </figure>
+        <figure>
+          <div class="bg-blue"><img src="/images/upgrades/hub-cap.jpg" alt="Hub Caps"></div>
+          <figcaption><a href="#">Hub Caps</a></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="reviews">
+      <h2>DMC Delorean Reviews</h2>
+      <ul>
+        <li>"So fast it's almost like traveling in time." (4/5)</li>
+        <li>"Coolest ride on the road." (4/5)</li>
+        <li>"I'm feeling McFly!" (5/5)</li>
+        <li>"The most futuristic ride of our day." (4.5/5)</li>
+        <li>"80's livin and I love it!" (5/5)</li>
+      </ul>
+    </section>
+
+  </div>
+</main>
+
+  <%- include('./partials/footer') %>
+</body>
+</html>
