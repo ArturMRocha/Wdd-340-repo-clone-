@@ -1,0 +1,69 @@
+/* --- PAGINA DE DETALHES (Tarefa 1 e 3) --- */
+.detail-container {
+    display: flex;
+    flex-direction: column; /* No celular, fica um em cima do outro */
+    width: 95%;
+    max-width: 1200px;
+    margin: 20px auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.detail-image-wrapper {
+    width: 100%;
+    background-color: #eee;
+}
+
+.detail-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.detail-info {
+    padding: 20px;
+}
+
+.detail-info h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Estilo de "Zebra" para as especificações */
+.detail-info p {
+    padding: 10px;
+    margin: 0;
+    border-bottom: 1px solid #ddd;
+    font-size: 1rem;
+}
+
+.detail-info p:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.detail-info .price {
+    font-size: 1.5rem;
+    color: #d00;
+    font-weight: bold;
+}
+
+/* --- RESPONSIVIDADE PARA DESKTOP (Telas maiores que 768px) --- */
+@media screen and (min-width: 768px) {
+    .detail-container {
+        flex-direction: row; /* Lado a lado no PC */
+        align-items: stretch;
+    }
+
+    .detail-image-wrapper {
+        width: 60%; /* Imagem ganha mais destaque */
+    }
+
+    .detail-info {
+        width: 40%;
+        border-left: 2px solid #eee;
+    }
+}

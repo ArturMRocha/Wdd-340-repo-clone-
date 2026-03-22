@@ -20,6 +20,8 @@ app.set("view engine", "ejs")
  * Routes
  *************************/
 app.use(static)
+const inventoryRoute = require("./routes/inventoryRoute")
+app.use("/inv", inventoryRoute)
 
 // ROTA PRINCIPAL: Quando o usuário entrar no site, renderiza o index.ejs
 app.get("/", function(req, res) {
@@ -40,3 +42,6 @@ const host = process.env.HOST || "localhost"
 app.listen(port, () => {
   console.log(`App rodando com sucesso em http://${host}:${port}`)
 })
+
+// Procure por esta linha no seu server.js
+app.use(express.static('public'))
