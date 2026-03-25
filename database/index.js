@@ -1,22 +1,23 @@
 const { Pool } = require("pg")
 require("dotenv").config()
 
-/* ***************
+/* ***********************
  * Connection Pool
- * *************** */
+ * SSL Object modification for Render
+ * *********************** */
 let pool
-if (process.env.NODE_ENV == "development") {
+if (process.env.NODE_ENV === "development") {
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
-      rejectUnauthorized: false, // ISSO AQUI É O QUE O RENDER EXIGE
+      rejectUnauthorized: false, // Isso permite certificados self-signed localmente
     },
   })
 } else {
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
-      rejectUnauthorized: false,
+      rejectUnauthorized: false, // ISSO AQUI É O QUE RESOLVE O ERRO NO RENDER!
     },
   })
 }
