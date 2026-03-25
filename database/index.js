@@ -21,6 +21,12 @@ if (process.env.NODE_ENV == "development") {
   })
 }
 
+// Configuração para o Render (Produção)
+  pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  })
+
 // Exportando a query para ser usada nos models
 module.exports = {
   async query(text, params) {
@@ -34,3 +40,5 @@ module.exports = {
     }
   },
 }
+
+module.exports = pool

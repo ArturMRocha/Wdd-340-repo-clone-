@@ -49,12 +49,14 @@ Util.buildItemDetails = async function(vehicle) {
 * Build the classification view HTML
 * ************************************ */
 Util.buildClassificationGrid = async function(data){
-  let grid
-  if(data && data.length > 0){ // Adicionada proteção extra
+  // 1. SEMPRE inicie a variável como uma string vazia para evitar "undefined"
+  let grid = "" 
+  
+  if(data && data.length > 0){
     grid = '<ul id="inv-display">'
     data.forEach(vehicle => { 
       grid += '<li>'
-      // MUDANÇA AQUI: Trocamos "../../" por "/" para o link nunca quebrar
+      // O link usando "/" está correto para evitar erros de subpastas
       grid +=  '<a href="/inv/detail/'+ vehicle.inv_id 
       + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
       + ' details"><img src="' + vehicle.inv_thumbnail 
@@ -78,7 +80,6 @@ Util.buildClassificationGrid = async function(data){
   }
   return grid
 }
-
 /* ****************************************
  * Middleware For Handling Errors
  * **************************************** */
