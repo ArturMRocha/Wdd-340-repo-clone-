@@ -256,3 +256,163 @@ body {
         border-left: 2px solid #eee;
     }
 }
+
+/* ==========================================================
+   ESTILOS PARA A TAREFA 4 (GERENCIAMENTO, FORMULÁRIOS E GRID)
+   ========================================================== */
+
+/* --- 1. VITRINE DE VEÍCULOS (Classification View) --- */
+#inv-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  list-style-type: none; /* Tira as bolinhas azuis chatas da lista */
+  padding: 0;
+  margin: 20px 0;
+}
+
+#inv-display li {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden; /* Mantém a imagem presa dentro da caixa */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease-in-out;
+}
+
+#inv-display li:hover {
+  transform: translateY(-5px); /* Efeito legal ao passar o mouse */
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+#inv-display .namePrice {
+  padding: 15px;
+  text-align: center;
+}
+
+#inv-display .namePrice h2 {
+  font-size: 1.2rem;
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+#inv-display img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover; /* Corta a imagem bonitinho sem achatar */
+  border-bottom: 3px solid #00bfff;
+}
+
+/* --- 2. TELA DE GERENCIAMENTO (Management View) --- */
+.management-container, .form-container {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+  margin: 20px auto;
+  max-width: 800px; /* Garante que não vai estourar na tela */
+}
+
+.management-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.management-container li {
+  margin-bottom: 15px;
+}
+
+.management-container a {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #f1f1f1;
+  color: #333;
+  text-decoration: none;
+  border-left: 4px solid #00bfff;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.management-container a:hover {
+  background-color: #e0e0e0;
+  border-left-color: #005b96;
+}
+
+/* --- 3. FORMULÁRIOS (Add Classification & Add Vehicle) --- */
+.form-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container fieldset {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+.form-container label {
+  display: block;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+/* Deixa os inputs bonitos e do tamanho certo */
+.form-container input[type="text"],
+.form-container input[type="number"],
+.form-container textarea,
+.form-container select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Impede que o padding quebre a largura */
+}
+
+/* Dá espaço pro texto do textarea */
+.form-container textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Destaca quando o usuário clica no input */
+.form-container input:focus,
+.form-container select:focus,
+.form-container textarea:focus {
+  outline: none;
+  border-color: #00bfff;
+  box-shadow: 0 0 5px rgba(0, 191, 255, 0.3);
+}
+
+.form-container button[type="submit"] {
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #00bfff;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%; /* Botão ocupa toda a largura */
+}
+
+.form-container button[type="submit"]:hover {
+  background-color: #009acd; /* Azul um pouco mais escuro ao passar o mouse */
+  color: white;
+}
+
+/* Mensagens de Erro/Aviso bonitas */
+.notice {
+  color: #d8000c;
+  background-color: #ffbaba;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  list-style: none;
+}

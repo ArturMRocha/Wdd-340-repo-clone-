@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+<body>
+  <%- include('../partials/header') %>
+  <%- include('../partials/navigation') %>
+  
+  <main class="main-content">
+    <% if (title) { %>
+        <h1><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+
+    <%- messages() %>
+
+    <div class="management-container">
+        <h2>Inventory Management</h2>
+        <p>Welcome to the inventory management page. Please select an option below:</p>
+        
+        <ul>
+            <li><a href="/inv/add-classification">Add New Classification</a></li>
+            <li><a href="/inv/add-inventory">Add New Vehicle</a></li>
+        </ul>
+    </div>
+  </main>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>

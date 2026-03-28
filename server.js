@@ -9,30 +9,57 @@ const express = require("express")
 const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
+const session = require("express-session")
+const pool = require('./database/')
 
 /* ***********************
- * View Engine e Templates (Adicionado)
+ * Middleware (Sessões, Mensagens e Body Parser)
  *************************/
-// Diz ao Express para usar o EJS para montar as telas
+app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId',
+}))
+
+// Express Messages Middleware
+app.use(require('connect-flash')())
+app.use(function(req, res, next){
+  res.locals.messages = require('express-messages')(req, res)
+  next()
+})
+
+// Body Parser Middleware (Essencial para as Tarefas 2 e 3)
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+
+/* ***********************
+ * View Engine e Templates
+ *************************/
 app.set("view engine", "ejs")
 
 /* ***********************
  * Routes
  *************************/
 app.use(static)
+// Arquivos estáticos (CSS, imagens)
+app.use(express.static('public')) 
+
 const inventoryRoute = require("./routes/inventoryRoute")
 app.use("/inv", inventoryRoute)
 
-// ROTA PRINCIPAL: Quando o usuário entrar no site, renderiza o index.ejs
+// ROTA PRINCIPAL
 app.get("/", function(req, res) {
   res.render("index")
 })
 
 /* ***********************
  * Local Server Information
- * Values from .env (environment) file
  *************************/
-// Adicionei um fallback (|| 3000) caso o seu arquivo .env não esteja configurado
 const port = process.env.PORT || 3000
 const host = process.env.HOST || "localhost"
 
@@ -42,6 +69,3 @@ const host = process.env.HOST || "localhost"
 app.listen(port, () => {
   console.log(`App rodando com sucesso em http://${host}:${port}`)
 })
-
-// Procure por esta linha no seu server.js
-app.use(express.static('public'))
