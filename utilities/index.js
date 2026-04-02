@@ -1,5 +1,7 @@
 const invModel = require("../models/inventory-model")
 const Util = {}
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 
 /* ************************
  * Constructs the nav HTML unordered list
@@ -107,4 +109,44 @@ Util.buildClassificationList = async function (classification_id = null) {
   classificationList += "</select>"
   return classificationList
 }
+
+/* ****************************************
+ * Middleware to check token validity
+ **************************************** */
+Util.checkJWTToken = (req, res, next) => {
+  if (req.cookies.jwt) {
+    jwt.verify(
+      req.cookies.jwt,
+      process.env.ACCESS_TOKEN_SECRET,
+      function (err, accountData) {
+        if (err) {
+          req.flash("Please log in")
+          res.clearCookie("jwt")
+          return res.redirect("/account/login")
+        }
+        res.locals.accountData = accountData
+        res.locals.loggedin = 1
+        next()
+      }
+    )
+  } else {
+    next()
+  }
+}
+
+/* ****************************************
+ * Middleware to check account type for Authorization
+ **************************************** */
+Util.checkAccountType = (req, res, next) => {
+  // Verifica se a pessoa está logada E se o tipo de conta é Funcionário ou Admin
+  if (res.locals.loggedin && 
+      (res.locals.accountData.account_type === 'Employee' || res.locals.accountData.account_type === 'Admin')) {
+    next() // Pode passar!
+  } else {
+    // Se for um 'Client' comum ou não estiver logado, manda de volta pro login
+    req.flash("notice", "Please log in with appropriate credentials.")
+    return res.redirect("/account/login")
+  }
+}
+
 module.exports = Util

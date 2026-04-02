@@ -11,10 +11,13 @@ const app = express()
 const static = require("./routes/static")
 const session = require("express-session")
 const pool = require('./database/')
+const cookieParser = require("cookie-parser")
+const utilities = require("./utilities/")
 
 /* ***********************
  * Middleware (Sessões, Mensagens e Body Parser)
  *************************/
+
 app.use(session({
   store: new (require('connect-pg-simple')(session))({
     createTableIfMissing: true,
@@ -36,7 +39,8 @@ app.use(function(req, res, next){
 // Body Parser Middleware (Essencial para as Tarefas 2 e 3)
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-
+app.use(cookieParser())
+app.use(utilities.checkJWTToken)
 /* ***********************
  * View Engine e Templates
  *************************/
@@ -51,6 +55,9 @@ app.use(express.static('public'))
 
 const inventoryRoute = require("./routes/inventoryRoute")
 app.use("/inv", inventoryRoute)
+
+const accountRoute = require("./routes/accountRoute")
+app.use("/account", accountRoute)
 
 // ROTA PRINCIPAL
 app.get("/", function(req, res) {
