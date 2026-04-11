@@ -11,6 +11,20 @@
     <%- messages() %>
     
     <%- grid %>
+
+    <div style="margin-top: 2rem; padding-top: 1rem; border-top: 2px solid #ccc; text-align: center;">
+      <% if (locals.loggedin) { %>
+        <form action="/fav/add" method="post">
+          <input type="hidden" name="inv_id" value="<%= locals.inv_id %>">
+          <button type="submit" style="padding: 12px 24px; background-color: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1rem; font-weight: bold;">
+              💖 Add to Wishlist
+          </button>
+        </form>
+      <% } else { %>
+        <p><i><a href="/account/login">Log in</a> to add this vehicle to your wishlist!</i></p>
+      <% } %>
+    </div>
+
   </main>
 
   <%- include('../partials/footer') %>

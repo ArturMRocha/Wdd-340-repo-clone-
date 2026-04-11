@@ -35,6 +35,7 @@ invCont.buildByInvId = async function (req, res, next) {
     title: vehicleName,
     nav,
     grid,
+    inv_id: inv_id // <--- OLHA O SEGREDO AQUI! Passando o ID para a tela.
   })
 }
 

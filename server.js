@@ -63,6 +63,9 @@ app.use("/account", accountRoute)
 app.get("/", function(req, res) {
   res.render("index")
 })
+ 
+const favRoute = require("./routes/favRoute")
+app.use("/fav", favRoute)
 
 /* ***********************
  * Local Server Information
